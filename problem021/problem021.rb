@@ -14,7 +14,7 @@ class Problem021
   
   def self.get_amicable_numbers(max)
     amicable_numbers = []
-    max.downto(2) do |n|
+    2.upto(max) do |n|
       unless amicable_numbers.include?(n)
         d = d(n)
         amicable_numbers += [n, d] if d(d) == n && n != d
@@ -24,7 +24,7 @@ class Problem021
   end
   
   def self.calc
-    amicable_numbers = get_amicable_numbers(10000)
+    amicable_numbers = get_amicable_numbers(100)
     amicable_numbers.uniq.inject(0) {|r, i| r + i }
   end
 end
