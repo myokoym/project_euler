@@ -16,8 +16,8 @@ describe Problem022 do
   end
   
   it "str to array" do
-    str = '"Miku","Rin","Ruka"'
-    subject.str_to_ary(str).should == ["Miku", "Rin", "Ruka"]
+    str = '"Miku","Rin","Luka"'
+    subject.str_to_ary(str).should == ["Miku", "Rin", "Luka"]
   end
   
   it "sort of abc" do
