@@ -6,12 +6,11 @@ describe Problem022 do
   it "read file" do
     path = "./spec_exsample.txt"
     raise if File.exist?(path)
-    `touch #{path}`
     begin
       File.open(path, "w") {|f| f.puts("one potate", "two potate") }
       subject.read(path).should =~ /one potate\ntwo potate(\n)?/
     ensure
-      `rm #{path}`
+      File.delete(path) if File.exist?(path)
     end
   end
   
@@ -46,3 +45,4 @@ __END__
 たとえば, リストがアルファベット順にソートされているとすると, COLINはリストの938番目にある. またCOLINは3 + 15 + 12 + 9 + 14 = 53という値を持つ. よってCOLINは938 × 53 = 49714というスコアを持つ.
 
 ファイル中の全名前のスコアの合計を求めよ.
+
