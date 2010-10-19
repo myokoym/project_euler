@@ -20,10 +20,16 @@ class Problem023
     self.sum_of_proper_divisors(n) > n ? true : false
   end
   
-  def self.mayn
-    1.upto(100) do |n|
-      p n if self.abundant_number?(n)
+  def self.abundant_numbers(max)
+    unless @abundants
+      @abundants = []
+      1.upto(max) {|n| @abundants << n if self.abundant_number?(n) }
     end
+  end
+  
+  def self.mayn
+    self.abundant_numbers(28123)
+    File.open("abundants.txt", "w") {|f| @abundants.each {|n| f.puts n } }
   end
 end
 
