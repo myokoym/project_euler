@@ -28,8 +28,20 @@ class Problem023
   end
   
   def self.mayn
-    self.abundant_numbers(28123)
-    File.open("abundants.txt", "w") {|f| @abundants.each {|n| f.puts n } }
+    abundants = []
+    File.open("abundants.txt", "r") do |f|
+      f.each_line {|line| abundants << line.to_i }
+    end
+    table = Array.new(28123) {|i| i }
+    sums = []
+    abundants.each do |a|
+      abundants.each do |b|
+        next if a > b
+        sums << a + b
+      end
+    end
+    p table - sums
+    p (table - sums).inject(0) {|r, i| r + i }
   end
 end
 
