@@ -15,7 +15,7 @@ class Problem024
     # p permutation = self.lexicographic_order(%w[0 1 2 3 4 5 6 7 8 9])
     # puts permutation[1000000]
     %w[0 1 2 3 4 5 6 7 8 9].permutation.each_with_index do |v, i|
-      p v
+      p v.to_s
       break if i == 999999
     end
   end
