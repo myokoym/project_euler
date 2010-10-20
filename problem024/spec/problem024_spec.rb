@@ -21,6 +21,10 @@ describe Problem024 do
     subject.lexicographic_order(digits).should == permutation
   end
   
+  it "mayn" do
+    subject.mayn
+  end
+  
 #  it "0, 1, 2, 3 to lexicographic order" do
 #    digits = %w[0 1 2 3]
 #    permutation = %w[012 021 102 120 201 210]
