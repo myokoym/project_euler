@@ -1,10 +1,9 @@
 #! ruby
 
 require "prime"
-require "daberu"
 
-ans = Daberu.new([])
-1.upto(99) do |n|
+ans = []
+1.upto(999999) do |n|
   a = n.to_s.split(//)
   flag = true
   a.size.times do |i|
@@ -15,7 +14,7 @@ ans = Daberu.new([])
     end
     flag = false unless Prime.prime?(b.join.to_i)
   end
-  ans << a.join.to_i if flag
+  p ans << a.join.to_i if flag
 end
 
 p ans
