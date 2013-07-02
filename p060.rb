@@ -11,9 +11,7 @@ e2 = Prime.each(MAX).select(&:odd?).combination(2).lazy.select {|*a|
   [*a].flatten.permutation(2).all? do |x, y|
       Prime.prime?("#{x}#{y}".to_i)
   end
-}
-
-e3 = e2.flat_map do |pair|
+}.tap {|v| p v.to_a }.flat_map {|pair|
   trios = []
   Prime.each(MAX).map do |p|
     next if pair[-1] >= p
@@ -24,33 +22,28 @@ e3 = e2.flat_map do |pair|
     end
   end
   trios
-end
-
-e4 = []
-e3.each do |v|
-  Prime.each(MAX).each do |p|
-    next if v[-1] >= p
-    next if v.include?(p)
-    ary = [v, p].flatten
+}.tap {|v| p v.to_a }.flat_map {|pair|
+  trios = []
+  Prime.each(MAX).map do |p|
+    next if pair[-1] >= p
+    next if pair.include?(p)
+    ary = [pair, p].flatten
     if ary.permutation(2).all? {|x, y| Prime.prime?("#{x}#{y}".to_i) }
-      e4 << ary
+      trios << ary
     end
   end
-end
-
-p e4.first
-exit 5
-
-e5 = []
-e4.lazy.each do |v|
-  Prime.each(MAX).each do |p|
-    next if v[-1] >= p
-    next if v.include?(p)
-    ary = [v, p].flatten
+  trios
+}.tap {|v| p v.to_a }.flat_map {|pair|
+  trios = []
+  Prime.each(MAX).map do |p|
+    next if pair[-1] >= p
+    next if pair.include?(p)
+    ary = [pair, p].flatten
     if ary.permutation(2).all? {|x, y| Prime.prime?("#{x}#{y}".to_i) }
-      e5 << ary
+      trios << ary
     end
   end
-end
+  trios
+}
 
-p e5.first
+p e2.first
