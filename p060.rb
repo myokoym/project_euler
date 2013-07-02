@@ -15,7 +15,7 @@ add_digit = Proc.new do |pair|
     ng = false
     pair.each do |num|
       unless [num, p].permutation(2).all? do |x, y|
-                Prime.prime?("#{x}#{y}".to_i)
+               Prime.prime?("#{x}#{y}".to_i)
              end
         ng = true
         break
