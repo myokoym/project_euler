@@ -7,11 +7,7 @@ require "prime"
 
 MAX = 700
 
-e2 = Prime.each(MAX).select(&:odd?).combination(2).lazy.select {|*a|
-  [*a].flatten.permutation(2).all? do |x, y|
-      Prime.prime?("#{x}#{y}".to_i)
-  end
-}.flat_map {|pair|
+p Prime.each(MAX).lazy.map {|v| [v] }.flat_map {|pair|
   trios = []
   Prime.each(MAX).map do |p|
     next if pair[-1] >= p
@@ -44,6 +40,4 @@ e2 = Prime.each(MAX).select(&:odd?).combination(2).lazy.select {|*a|
     end
   end
   trios
-}
-
-p e2.first
+}.first
