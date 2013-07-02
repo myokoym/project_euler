@@ -5,9 +5,10 @@
 
 require "prime"
 
-MAX = 700
+MAX = 10000
 
 add_digit = Proc.new do |pair|
+  p pair
   trios = []
   Prime.each(MAX) do |p|
     next if pair[-1] >= p
@@ -28,6 +29,7 @@ add_digit = Proc.new do |pair|
 end
 
 p Prime.each(MAX).lazy.map {|v| [v] }
+  .flat_map(&add_digit)
   .flat_map(&add_digit)
   .flat_map(&add_digit)
   .flat_map(&add_digit).first
