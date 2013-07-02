@@ -12,10 +12,17 @@ add_digit = Proc.new do |pair|
   Prime.each(MAX).map do |p|
     next if pair[-1] >= p
     next if pair.include?(p)
-    ary = [pair, p].flatten
-    if ary.permutation(2).all? {|x, y| Prime.prime?("#{x}#{y}".to_i) }
-      trios << ary
+    ng = false
+    pair.each do |num|
+      unless [num, p].permutation(2).all? do |x, y|
+                Prime.prime?("#{x}#{y}".to_i)
+             end
+        ng = true
+        break
+      end
     end
+    next if ng
+    trios << [pair, p].flatten
   end
   trios
 end
