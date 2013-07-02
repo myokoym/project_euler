@@ -7,7 +7,7 @@ require "prime"
 
 MAX = 700
 
-p Prime.each(MAX).lazy.map {|v| [v] }.flat_map {|pair|
+add_digit = Proc.new do |pair|
   trios = []
   Prime.each(MAX).map do |p|
     next if pair[-1] >= p
@@ -18,26 +18,9 @@ p Prime.each(MAX).lazy.map {|v| [v] }.flat_map {|pair|
     end
   end
   trios
-}.flat_map {|pair|
-  trios = []
-  Prime.each(MAX).map do |p|
-    next if pair[-1] >= p
-    next if pair.include?(p)
-    ary = [pair, p].flatten
-    if ary.permutation(2).all? {|x, y| Prime.prime?("#{x}#{y}".to_i) }
-      trios << ary
-    end
-  end
-  trios
-}.flat_map {|pair|
-  trios = []
-  Prime.each(MAX).map do |p|
-    next if pair[-1] >= p
-    next if pair.include?(p)
-    ary = [pair, p].flatten
-    if ary.permutation(2).all? {|x, y| Prime.prime?("#{x}#{y}".to_i) }
-      trios << ary
-    end
-  end
-  trios
-}.first
+end
+
+p Prime.each(MAX).lazy.map {|v| [v] }
+  .flat_map(&add_digit)
+  .flat_map(&add_digit)
+  .flat_map(&add_digit).first
