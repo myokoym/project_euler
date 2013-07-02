@@ -9,7 +9,7 @@ MAX = 700
 
 add_digit = Proc.new do |pair|
   trios = []
-  Prime.each(MAX).map do |p|
+  Prime.each(MAX) do |p|
     next if pair[-1] >= p
     next if pair.include?(p)
     ng = false
