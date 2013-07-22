@@ -3,7 +3,7 @@
 def counting_summations(sum)
   2.upto(sum).flat_map do |size|
     (1...sum).to_a.repeated_combination(size).select do |a|
-      a.inject(:+) == 5
+      a.inject(:+) == sum
     end
   end
 end
